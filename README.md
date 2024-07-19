@@ -31,17 +31,11 @@ Book Management Store is a web application that allows users to manage their boo
     ```sh
     npm install
     ```
-
-3. Create a `.env` file in the `backend` directory and add your environment variables:
-    ```
-    PORT=5000
-    MONGODB_URI=<your_mongodb_uri>
-    ABCD=<your_value>
-    ```
-
-4. Start the backend server:
+    
+3. Start the backend server:
     ```sh
-    npm start
+    cd src
+    node index.js
     ```
 
 ### Frontend Setup
@@ -58,12 +52,12 @@ Book Management Store is a web application that allows users to manage their boo
 
 3. Start the frontend development server:
     ```sh
-    npm start
+    npm run dev
     ```
 
 ## Usage
 
-1. Open your browser and navigate to `http://localhost:3000` to access the frontend.
+1. Open your browser and navigate to `http://localhost:5173` to access the frontend.
 2. Register a new account or log in with an existing account.
-3. Use the navigation bar to add new books, update existing books, and view the list of books.
+3. Demo Account: username: abcd@gmail.com, password: qwerty
 
