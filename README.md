@@ -18,7 +18,6 @@ Book Management Store is a web application that allows users to manage their boo
 ### Prerequisites
 
 - Node.js and npm installed on your machine
-- MongoDB Atlas account for database
 
 ### Backend Setup
 
