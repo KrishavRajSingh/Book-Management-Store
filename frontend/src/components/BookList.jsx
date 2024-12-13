@@ -18,7 +18,7 @@ const BookList = () => {
 
     const handleDelete = async (id) => {
         await deleteBook(id, token);
-        setBooks(books.filter(book => book._id !== id));
+        setBooks(books.filter(book => book.id !== id));
     };
 
     const cardStyle = {
@@ -56,17 +56,18 @@ const BookList = () => {
             {addBook && <AddBook setAddBook={setAddBook} setBooks={setBooks} books={books} token={token}/>}
             <ul style={listStyle}>
                 {books.map(book => (
-                    <li key={book._id}>
-                        <div key={book._id} style={cardStyle}>
+                    <li key={book.id}>
+                        <div key={book.id} style={cardStyle}>
                             <h2>{book.title}</h2>
                             <p><strong>Author:</strong> {book.author}</p>
                             <p><strong>Price:</strong> ₹{book.price}</p>
-                            <p><strong>Publish Year:</strong> {book.publishYear}</p>
+                            <p><strong>Publish Year:</strong> {book.publish_year}</p>
+                            {book.genre && <p><strong>Genre:</strong> {book.genre}</p>}
                             {token && <>
-                                <button onClick={() => setUpdateBookId(updateBookId!==book._id?book._id:0)}>Update</button>
-                                <button style={buttonStyle} onClick={() => handleDelete(book._id)}>Delete</button>
+                                <button onClick={() => setUpdateBookId(updateBookId!==book.id?book.id:0)}>Update</button>
+                                <button style={buttonStyle} onClick={() => handleDelete(book.id)}>Delete</button>
                             </>}
-                            {updateBookId === book._id && <UpdateBook setBooks={setBooks} books={books} book={book} token={token}/>}
+                            {updateBookId === book.id && <UpdateBook setBooks={setBooks} books={books} book={book} token={token}/>}
                         </div>
                     </li>
                 ))}

@@ -1,29 +1,21 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const pool = require('../db'); // Import your PostgreSQL connection pool
 
-const userSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-});
-
-// Hash password before saving
-userSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) return next();
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
-});
-
-userSchema.methods.matchPassword = async function (enteredPassword) {
-    return await bcrypt.compare(enteredPassword, this.password);
+// Function to ensure the 'users' table exists
+const createUsersTable = async () => {
+    try {
+        const query = `
+            CREATE TABLE IF NOT EXISTS users (
+                id SERIAL PRIMARY KEY,
+                username VARCHAR(255) NOT NULL UNIQUE,
+                password VARCHAR(255) NOT NULL,
+                created_at TIMESTAMP DEFAULT NOW()
+            );
+        `;
+        await pool.query(query); // Execute the query to create the table if it doesn't exist
+        console.log('Users table ensured to exist.');
+    } catch (error) {
+        console.error('Error ensuring users table exists:', error);
+    }
 };
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+module.exports = createUsersTable;

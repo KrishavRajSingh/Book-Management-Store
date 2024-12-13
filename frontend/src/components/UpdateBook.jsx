@@ -7,19 +7,21 @@ const UpdateBook = ({ book, token, setBooks, books }) => {
     const [author, setAuthor] = useState('');
     const [publishYear, setPublishYear] = useState('');
     const [price, setPrice] = useState('');
+    const [genre, setGenre] = useState("");
 
     useEffect(() => {
         setTitle(book.title);
         setAuthor(book.author);
-        setPublishYear(book.publishYear);
+        setPublishYear(book.publish_year);
         setPrice(book.price);
+        setGenre(book.genre)
     }, [book]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await updateBook(book._id, { title, author, publishYear, price }, token);
+        const res = await updateBook(book.id, { title, author, publishYear, price, genre }, token);
         setBooks(books.map((item)=>{
-            if(item._id == book._id){
+            if(item.id == book.id){
                 return res.data;
             }
             return item;
@@ -34,6 +36,7 @@ const UpdateBook = ({ book, token, setBooks, books }) => {
                 <input type="text" placeholder="Author" value={author} onChange={(e) => setAuthor(e.target.value)} required />
                 <input type="number" placeholder="Publish Year" value={publishYear} onChange={(e) => setPublishYear(e.target.value)} required />
                 <input type="number" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} required />
+                <input type="text"  placeholder='Genre' value={genre} onChange={(e) => setGenre(e.target.value)}/>
                 <button type="submit">Update Book</button>
             </form>
         </div>
@@ -44,17 +47,19 @@ UpdateBook.propTypes = {
     book: PropTypes.shape({
         title: PropTypes.string,
         author: PropTypes.string,
-        publishYear: PropTypes.number,
+        publish_year: PropTypes.number,
         price: PropTypes.number,
-        _id: PropTypes.string
+        genre: PropTypes.string,
+        id: PropTypes.number
     }),
     token: PropTypes.string,
     books: PropTypes.arrayOf(PropTypes.shape({
         title: PropTypes.string,
         author: PropTypes.string,
-        publishYear: PropTypes.number,
+        publish_year: PropTypes.number,
         price: PropTypes.number,
-        _id: PropTypes.string
+        genre: PropTypes.genre,
+        id: PropTypes.number
     })).isRequired,
     setBooks: PropTypes.func.isRequired
 };
