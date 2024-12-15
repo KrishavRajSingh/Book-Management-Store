@@ -9,6 +9,18 @@ const UpdateBook = ({ book, token, setBooks, books }) => {
     const [price, setPrice] = useState('');
     const [genre, setGenre] = useState("");
 
+    const genres = [
+        "Fiction",
+        "Non-Fiction",
+        "Mystery",
+        "Science Fiction",
+        "Fantasy",
+        "Biography",
+        "Self-Help",
+        "Romance",
+        "History"
+    ];
+
     useEffect(() => {
         setTitle(book.title);
         setAuthor(book.author);
@@ -36,7 +48,16 @@ const UpdateBook = ({ book, token, setBooks, books }) => {
                 <input type="text" placeholder="Author" value={author} onChange={(e) => setAuthor(e.target.value)} required />
                 <input type="number" placeholder="Publish Year" value={publishYear} onChange={(e) => setPublishYear(e.target.value)} required />
                 <input type="number" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} required />
-                <input type="text"  placeholder='Genre' value={genre} onChange={(e) => setGenre(e.target.value)}/>
+                <select
+                    value={genre}
+                    onChange={(e) => setGenre(e.target.value)}
+                    required
+                >
+                    <option value="" disabled>Select Genre</option>
+                    {genres.map((g, index) => (
+                        <option key={index} value={g}>{g}</option>
+                    ))}
+                </select>
                 <button type="submit">Update Book</button>
             </form>
         </div>

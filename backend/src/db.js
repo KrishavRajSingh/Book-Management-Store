@@ -1,11 +1,11 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  user: 'krishav', // Replace with your PostgreSQL username
-  host: 'localhost', // Use 'postgres-container' if using Docker
+  user: 'krishav',
+  host: 'db',
   database: 'postgres',
-  password: 'qwerty', // Replace with your PostgreSQL password
-  port: 5432, // Default PostgreSQL port
+  password: 'qwerty',
+  port: 5432,
 });
 
 pool.connect()
