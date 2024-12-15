@@ -21,11 +21,11 @@ function App() {
     <>
       <Router>
         <AppBar setAuthToken={setAuthToken} token={token}/>
-        <div style={{display: 'flex', justifyContent: 'space-evenly'}}>
-          <a href="https://www.maitilabs.org/" target="_blank">
-            <img src='https://www.maitilabs.org/static/media/Logo.00129f1c05848c338b15.png' className="logo" alt="Vite logo" />
+        <div style={{}}>
+          <a href="https://gsv.ac.in/" target="_blank">
+            <img src='https://gsv.ac.in/wp-content/uploads/2024/11/cropped-logo_for_website-1-2.png' className="logo" alt="Vite logo" />
           </a>
-          <h1>Book Management Store</h1>
+          <h1>Library</h1>
         </div>
           <div>
               <Routes>

@@ -7,15 +7,29 @@ const AddBook = ({ setAddBook, token, setBooks, books }) => {
     const [author, setAuthor] = useState('');
     const [publishYear, setPublishYear] = useState('');
     const [price, setPrice] = useState('');
+    const [genre, setGenre] = useState("");
+
+    const genres = [
+        "Fiction",
+        "Non-Fiction",
+        "Mystery",
+        "Science Fiction",
+        "Fantasy",
+        "Biography",
+        "Self-Help",
+        "Romance",
+        "History"
+    ];
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await addBook({ title, author, publishYear, price }, token);
+        const res = await addBook({ title, author, publishYear, price, genre }, token);
         setTitle('');
         setAuthor('');
         setPublishYear('');
         setPrice('');
-        setBooks([...books, res.data])
+        setBooks([...books, res.data]);
+        setGenre("");
         setAddBook(false);
     };
     const cardStyle = {
@@ -40,7 +54,16 @@ const AddBook = ({ setAddBook, token, setBooks, books }) => {
                 <input type="text" placeholder="Author" value={author} onChange={(e) => setAuthor(e.target.value)} required />
                 <input type="number" placeholder="Publish Year" value={publishYear} onChange={(e) => setPublishYear(e.target.value)} required />
                 <input type="number" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} required />
-                <br />
+                <select
+                    value={genre}
+                    onChange={(e) => setGenre(e.target.value)}
+                    required
+                >
+                    <option value="" disabled>Select Genre</option>
+                    {genres.map((g, index) => (
+                        <option key={index} value={g}>{g}</option>
+                    ))}
+                </select>
                 <button type="submit">Add Book</button>
             </form>
         </div>
@@ -56,7 +79,8 @@ AddBook.propTypes = {
         author: PropTypes.string,
         publishYear: PropTypes.number,
         price: PropTypes.number,
-        _id: PropTypes.string
+        genre: PropTypes.string,
+        id: PropTypes.string
     })).isRequired,
 }
 
